@@ -1,6 +1,7 @@
 import os
 
 from jsonschema import validate
+from jsonschema.exceptions import ValidationError
 
 
 def dir_to_dict(path):
@@ -38,4 +39,12 @@ def validate_dir(path, schema_dict):
     validate the directory structure against the schema.
     '''
     as_dict = dir_to_dict(path)
-    validate(as_dict, schema_dict)
+    try:
+        validate(as_dict, schema_dict)
+    except ValidationError as e:
+        raise DirectoryValidationError(e)
+
+
+class DirectoryValidationError(Exception):
+    def __init__(self, error):
+        pass

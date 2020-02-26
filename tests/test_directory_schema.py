@@ -1,7 +1,6 @@
 import os
 
 import pytest
-from jsonschema.exceptions import ValidationError
 
 from directory_schema import directory_schema
 
@@ -30,5 +29,5 @@ def test_validate_dir():
     directory_schema.validate_dir(fixture_path, arr_schema)
 
     obj_schema = {'type': 'object'}
-    with pytest.raises(ValidationError):
+    with pytest.raises(directory_schema.DirectoryValidationError):
         directory_schema.validate_dir(fixture_path, obj_schema)
