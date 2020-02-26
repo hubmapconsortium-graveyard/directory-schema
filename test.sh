@@ -13,3 +13,4 @@ pytest tests
 flake8 tests src *.py || die 'Try: "autopep8 --in-place --aggressive -r ."'
 mypy tests src *.py
 python setup.py check --metadata --strict
+check-manifest
