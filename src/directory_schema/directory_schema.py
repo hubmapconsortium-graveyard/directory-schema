@@ -1,5 +1,7 @@
 import os
 
+from jsonschema import validate
+
 
 def dir_to_dict(path):
     '''
@@ -28,3 +30,12 @@ def dir_to_dict(path):
                 item['contents'] = dir_to_dict(os.path.join(path, entry.name))
             items_to_return.append(item)
     return items_to_return
+
+
+def validate_dir(path, schema_dict):
+    '''
+    Given a directory path, and a JSON schema as a dict,
+    validate the directory structure against the schema.
+    '''
+    as_dict = dir_to_dict(path)
+    validate(as_dict, schema_dict)

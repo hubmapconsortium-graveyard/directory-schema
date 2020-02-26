@@ -1,5 +1,8 @@
 import os
 
+import pytest
+from jsonschema.exceptions import ValidationError
+
 from directory_schema import directory_schema
 
 
@@ -18,3 +21,14 @@ def test_dir_to_dict():
             "contents": [{"type": "file", "name": "fake.py"}],
         },
     ]
+
+
+def test_validate_dir():
+    fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "fake-directory")
+
+    arr_schema = {'type': 'array'}
+    directory_schema.validate_dir(fixture_path, arr_schema)
+
+    obj_schema = {'type': 'object'}
+    with pytest.raises(ValidationError):
+        directory_schema.validate_dir(fixture_path, obj_schema)
