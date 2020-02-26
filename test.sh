@@ -10,7 +10,6 @@ reset=`tput sgr0`
 die() { set +v; echo "$red$*$reset" 1>&2 ; exit 1; }
 
 pytest tests
-black --check tests src *.py || die 'try:  black tests src *.py'
-flake8 tests src *.py
+flake8 tests src *.py || die 'Try: "autopep8 --in-place --aggressive -r ."'
 mypy tests src *.py
 python setup.py check --metadata --strict

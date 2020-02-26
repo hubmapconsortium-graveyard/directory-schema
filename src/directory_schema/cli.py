@@ -1,6 +1,8 @@
 """Console script for directory_schema."""
 import argparse
 import sys
+
+
 def main():
     """Console script for directory_schema."""
     parser = argparse.ArgumentParser()

@@ -1,5 +1,6 @@
 import os
 
+
 def dir_to_dict(path):
     '''
     Walk the directory at `path`, and return a dict like that from `tree -J`:

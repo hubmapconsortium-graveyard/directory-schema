@@ -9,7 +9,6 @@ python = ["3.8"]
 lint_dependencies = [
     "-e",
     ".",
-    "black",
     "flake8",
     "flake8-bugbear",
     "mypy",
@@ -44,7 +43,6 @@ def cover(session):
 def lint(session):
     session.install(*lint_dependencies)
     files = ["tests"] + [str(p) for p in Path(".").glob("*.py")]
-    session.run("black", "--check", *files)
     session.run("flake8", *files)
     session.run("mypy", *files)
     session.run("python", "setup.py", "check", "--metadata", "--strict")
