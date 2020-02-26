@@ -47,4 +47,10 @@ def validate_dir(path, schema_dict):
 
 class DirectoryValidationError(Exception):
     def __init__(self, error):
-        pass
+        self.json_validation_error = error
+
+    def __str__(self):
+        return self.json_validation_error.__str__()
+
+    def _repr__(self):
+        return self.json_validation_error.__repr__()
