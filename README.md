@@ -12,7 +12,5 @@ Use JSON Schema to validate directory structures
 
 # Credits
 This package was created with Cookiecutter and the `cs01/cookiecutter-pypackage` project template.
-
-[Cookiecutter](https://github.com/audreyr/cookiecutter)
-
-[cs01/cookiecutter-pypackage](https://github.com/cs01/cookiecutter-pypackage)
+- [Cookiecutter](https://github.com/audreyr/cookiecutter)
+- [cs01/cookiecutter-pypackage](https://github.com/cs01/cookiecutter-pypackage)
