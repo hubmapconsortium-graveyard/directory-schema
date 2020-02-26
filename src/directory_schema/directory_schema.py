@@ -17,7 +17,7 @@ def dir_to_dict(path):
 
     items_to_return = []
     with os.scandir(path) as scan:
-        for entry in scan:
+        for entry in sorted(scan, key=lambda entry: entry.name):
             is_dir = entry.is_dir()
             item = {
                 'type': 'directory' if is_dir else 'file',
