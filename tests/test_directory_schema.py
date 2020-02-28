@@ -29,5 +29,5 @@ def test_validate_dir():
     directory_schema.validate_dir(fixture_path, arr_schema)
 
     obj_schema = {'type': 'object'}
-    with pytest.raises(directory_schema.DirectoryValidationError):
+    with pytest.raises(directory_schema.DirectoryValidationErrors):
         directory_schema.validate_dir(fixture_path, obj_schema)

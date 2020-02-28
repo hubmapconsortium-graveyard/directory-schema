@@ -1,7 +1,6 @@
 import os
 
-from jsonschema import validate, Draft7Validator
-from jsonschema.exceptions import ValidationError
+from jsonschema import Draft7Validator
 
 
 def dir_to_dict(path):
@@ -39,18 +38,19 @@ def validate_dir(path, schema_dict):
     validate the directory structure against the schema.
     '''
     as_dict = dir_to_dict(path)
-    try:
-        validate(as_dict, schema_dict, cls=Draft7Validator)
-    except ValidationError as e:
-        raise DirectoryValidationError(e)
+    validator = Draft7Validator(schema_dict)
+    errors = list(validator.iter_errors(as_dict))
+
+    if errors:
+        raise DirectoryValidationErrors(errors)
 
 
-class DirectoryValidationError(Exception):
-    def __init__(self, error):
-        self.json_validation_error = error
+class DirectoryValidationErrors(Exception):
+    def __init__(self, errors):
+        self.json_validation_errors = errors
 
     def __str__(self):
-        return self.json_validation_error.__str__()
+        return '\n'.join([str(e) for e in self.json_validation_errors])
 
     def _repr__(self):
         return self.json_validation_error.__repr__()

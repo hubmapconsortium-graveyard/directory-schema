@@ -4,7 +4,7 @@ import os
 
 from yaml import safe_load as load_yaml
 
-from directory_schema.directory_schema import validate_dir, DirectoryValidationError
+from directory_schema.directory_schema import validate_dir, DirectoryValidationErrors
 
 
 def dir_path(string):
@@ -26,7 +26,7 @@ def main():
         schema_dict = load_yaml(args.schema)
         validate_dir(args.dir, schema_dict)
         return 0
-    except DirectoryValidationError as e:
+    except DirectoryValidationErrors as e:
         print(e)
         return 1
 
