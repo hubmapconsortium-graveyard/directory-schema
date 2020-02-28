@@ -13,12 +13,13 @@ def dir_path(string):
     else:
         raise Exception(f'"{string}" is not a directory')
 
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('dir', metavar='DIRECTORY', type=dir_path,
-        help='Directory to validate')
+                        help='Directory to validate')
     parser.add_argument('schema', metavar='SCHEMA', type=argparse.FileType('r'),
-        help='Schema (JSON or YAML) to validate against')
+                        help='Schema (JSON or YAML) to validate against')
     args = parser.parse_args()
 
     try:
