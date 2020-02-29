@@ -66,13 +66,13 @@ def validate_dir(path, schema_dict):
 
 def validation_error_to_string(error):
     schema_string = ''.join([f'\n  {line}' for line in dump_yaml(error.schema).split('\n')])
-    print(f'''
+    return f'''
 This directory:
 {to_dir_listing(error.instance, '  ')}
 
 fails this "{error.validator}" check:
 {schema_string}
-    ''')
+    '''
 
 
 class DirectoryValidationErrors(Exception):
