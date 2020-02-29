@@ -64,6 +64,7 @@ def validate_dir(path, schema_dict):
     if errors:
         raise DirectoryValidationErrors(errors)
 
+
 def validation_error_to_string(error):
     schema_string = ''.join([f'\n  {line}' for line in dump_yaml(error.schema).split('\n')])
     return f'''

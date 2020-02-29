@@ -31,7 +31,7 @@ def main():
         print(e)
         return 1
     except SchemaError as e:
-        print(f'Provided document is not valid JSON Schema: {e.message}') # noqa B306
+        print(f'Provided document is not valid JSON Schema: {e.message}')  # noqa B306
         return 2
 
 
