@@ -1,6 +1,6 @@
 import os
 
-from jsonschema import Draft7Validator
+from jsonschema import Draft7Validator, validate, ValidationError
 
 
 def dir_to_dict(path):
@@ -38,6 +38,13 @@ def validate_dir(path, schema_dict):
     validate the directory structure against the schema.
     '''
     as_dict = dir_to_dict(path)
+    try:
+        validate(as_dict, schema_dict, cls=Draft7Validator)
+    except ValidationError:
+        # validate() can throw SchemaError;
+        # ValidationError will be handled in the next phase.
+        pass
+
     validator = Draft7Validator(schema_dict)
     errors = list(validator.iter_errors(as_dict))
 

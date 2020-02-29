@@ -2,6 +2,7 @@ import argparse
 import sys
 import os
 
+from jsonschema.exceptions import SchemaError
 from yaml import safe_load as load_yaml
 
 from directory_schema.directory_schema import validate_dir, DirectoryValidationErrors
@@ -29,6 +30,9 @@ def main():
     except DirectoryValidationErrors as e:
         print(e)
         return 1
+    except SchemaError as e:
+        print(f'Provided document is not valid JSON Schema: {e.message}') # noqa B306
+        return 2
 
 
 if __name__ == "__main__":
