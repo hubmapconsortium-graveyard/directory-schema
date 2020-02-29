@@ -1,6 +1,19 @@
 import os
 
 from jsonschema import Draft7Validator, validate, ValidationError
+from yaml import dump as dump_yaml
+
+
+def to_dir_listing(dir_as_list, indent=''):
+    next_indent = indent + '    '
+    return ''.join([
+        '\n' + indent + item['name']
+        + to_dir_listing(
+            item['contents'] if 'contents' in item else [],
+            next_indent
+        )
+        for item in dir_as_list
+    ])
 
 
 def dir_to_dict(path):
@@ -51,13 +64,26 @@ def validate_dir(path, schema_dict):
     if errors:
         raise DirectoryValidationErrors(errors)
 
+def validation_error_to_string(error):
+    schema_string = ''.join([f'\n  {line}' for line in dump_yaml(error.schema).split('\n')])
+    print(f'''
+This directory:
+{to_dir_listing(error.instance, '  ')}
+
+fails this "{error.validator}" check:
+{schema_string}
+    ''')
+
 
 class DirectoryValidationErrors(Exception):
     def __init__(self, errors):
         self.json_validation_errors = errors
 
     def __str__(self):
-        return '\n'.join([str(e) for e in self.json_validation_errors])
+        return '\n'.join([
+            validation_error_to_string(e)
+            for e in self.json_validation_errors
+        ])
 
     def _repr__(self):
         return self.json_validation_error.__repr__()
