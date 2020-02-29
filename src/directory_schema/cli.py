@@ -15,6 +15,18 @@ def dir_path(string):
         raise Exception(f'"{string}" is not a directory')
 
 
+def to_dir_listing(dir_as_list, indent=''):
+    next_indent = indent + '    '
+    return ''.join([
+        '\n' + indent + item['name']
+        + to_dir_listing(
+            item['contents'] if 'contents' in item else [],
+            next_indent
+        )
+        for item in dir_as_list
+    ])
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('dir', metavar='DIRECTORY', type=dir_path,
@@ -28,7 +40,26 @@ def main():
         validate_dir(args.dir, schema_dict)
         return 0
     except DirectoryValidationErrors as e:
-        print(e)
+        err = e.json_validation_errors[0]
+        print(f'''
+context: {err.context}
+
+cause: {err.cause}
+
+instance: {err.instance}
+
+instance list: {to_dir_listing(err.instance)}
+
+path: {err.path}
+
+schema: {err.schema}
+
+schema_path: {err.schema_path}
+
+validator: {err.validator}
+
+validator_value: {err.validator_value}
+        ''')
         return 1
     except SchemaError as e:
         print(f'Provided document is not valid JSON Schema: {e.message}') # noqa B306
