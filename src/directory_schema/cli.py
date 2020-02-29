@@ -3,7 +3,7 @@ import sys
 import os
 
 from jsonschema.exceptions import SchemaError
-from yaml import safe_load as load_yaml
+from yaml import dump as dump_yaml, safe_load as load_yaml
 
 from directory_schema.directory_schema import validate_dir, DirectoryValidationErrors
 
@@ -41,24 +41,14 @@ def main():
         return 0
     except DirectoryValidationErrors as e:
         err = e.json_validation_errors[0]
+        schema_string = '\n'.join([f'  {line}' for line in dump_yaml(err.schema).split('\n')])
         print(f'''
-context: {err.context}
+This directory:
+{to_dir_listing(err.instance, '  ')}
 
-cause: {err.cause}
+fails this "{err.validator}" check:
 
-instance: {err.instance}
-
-instance list: {to_dir_listing(err.instance)}
-
-path: {err.path}
-
-schema: {err.schema}
-
-schema_path: {err.schema_path}
-
-validator: {err.validator}
-
-validator_value: {err.validator_value}
+{schema_string}
         ''')
         return 1
     except SchemaError as e:
