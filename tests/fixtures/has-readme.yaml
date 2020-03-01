@@ -1,21 +1,5 @@
-type: array
-items:
-  type: object
-  required:
-    - name
-    - type
-  properties:
-    name:
-      type: string
-    type:
-      type: string
-      enum:
-        - directory
-        - file
 contains:
-  type: object
   properties:
     name:
-      type: string
       enum:
         - README.md
