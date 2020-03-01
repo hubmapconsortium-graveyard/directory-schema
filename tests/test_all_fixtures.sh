@@ -5,7 +5,16 @@ set -o pipefail
 cd fixtures
 
 for SCHEMA in *.*; do
+  SCHEMA_STEM=$(echo $SCHEMA | sed -e 's/\..*//')
   for DIR in */; do
-    echo "Test $SCHEMA on $DIR"
+    DIR_STEM=$(basename $DIR)
+    CMD="directory_schema $DIR $SCHEMA"
+    if [ $SCHEMA_STEM == $DIR_STEM ]; then
+      echo "Expect '$CMD' to pass..."
+      $CMD > /dev/null || die "'$CMD' failed, and it should have passed."
+    else
+      echo "Expect '$CMD' to fail..."
+      ! $CMD > /dev/null || die "'$CMD' passed, and it should have failed."
+    fi
   done
 done
