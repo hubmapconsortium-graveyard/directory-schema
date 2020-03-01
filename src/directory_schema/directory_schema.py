@@ -65,14 +65,14 @@ def validate_dir(path, schema_dict):
         raise DirectoryValidationErrors(errors)
 
 
-def validation_error_to_string(error):
+def validation_error_to_string(error, indent):
     schema_string = ''.join([
-        f'\n  {line}' for line in
+        f'\n{indent}{line}' for line in
         dump_yaml(error.schema[error.validator]).split('\n')
     ])
     return f'''
 This directory:
-{to_dir_listing(error.instance, '  ')}
+{to_dir_listing(error.instance, indent)}
 
 fails this "{error.validator}" check:
 {schema_string}
@@ -85,7 +85,7 @@ class DirectoryValidationErrors(Exception):
 
     def __str__(self):
         return '\n'.join([
-            validation_error_to_string(e)
+            validation_error_to_string(e, '    ')
             for e in self.json_validation_errors
         ])
 
