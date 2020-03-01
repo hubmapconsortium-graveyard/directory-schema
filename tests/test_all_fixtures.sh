@@ -2,7 +2,9 @@
 set -o errexit
 set -o pipefail
 
-cd fixtures
+die() { set +v; echo "$*" 1>&2 ; exit 1; }
+
+cd $(dirname $0)/fixtures
 
 for SCHEMA in *.*; do
   SCHEMA_STEM=$(echo $SCHEMA | sed -e 's/\..*//')
