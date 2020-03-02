@@ -17,7 +17,7 @@ setup(
     ],
     description="Use JSON Schema to validate directory structures",
     entry_points={"console_scripts": ["directory_schema=directory_schema.cli:main",],},
-    install_requires=["jsonschema"],
+    install_requires=["jsonschema", "pyyaml"],
     license="MIT license",
     long_description=readme,
     long_description_content_type="text/markdown",

@@ -59,7 +59,7 @@ def build(session):
     session.install("twine")
     session.run("rm", "-rf", "dist", "build", external=True)
     session.run("python", "setup.py", "--quiet", "sdist", "bdist_wheel")
-    session.run("tests/test_all_fixtures.sh")
+    session.run("bash", "tests/test_all_fixtures.sh")  # Causes warning: bash is not in venv.
 
 
 @nox.session(python="3.8")
