@@ -1,0 +1,4 @@
+items:
+  properties:
+    name:
+      pattern: '\.txt$'

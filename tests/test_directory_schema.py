@@ -13,7 +13,7 @@ def test_directory_schema():
 def test_dir_to_dict():
     fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "has-readme-and-license")
     assert directory_schema.dir_to_dict(fixture_path) == [
-        {"type": "file", "name": "LICENSE.md"},
+        {"type": "file", "name": "LICENSE.txt"},
         {"type": "file", "name": "README.md"},
     ]
 

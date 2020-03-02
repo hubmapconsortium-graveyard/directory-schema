@@ -70,12 +70,19 @@ def validation_error_to_string(error, indent):
         f'\n{indent}{line}' for line in
         dump_yaml(error.schema[error.validator]).split('\n')
     ])
-    return f'''
-This directory:
-{to_dir_listing(error.instance, indent)}
+
+    fail_message = f'''
 
 fails this "{error.validator}" check:
 {schema_string}
+    '''
+
+    if type(error.instance) == str:
+        return f'''This string:
+{indent}{error.instance}{fail_message}
+        '''
+    return f'''This directory:
+{to_dir_listing(error.instance, indent)}{fail_message}
     '''
 
 
