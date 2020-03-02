@@ -1,4 +1,9 @@
-items:
-  properties:
-    name:
-      pattern: '\.txt$'
+{
+  "items": {
+    "properties": {
+      "name": {
+        "pattern": "\\.txt$"
+      }
+    }
+  }
+}
