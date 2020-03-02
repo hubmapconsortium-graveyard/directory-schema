@@ -1,0 +1,8 @@
+contains:
+  properties:
+    name:
+      enum:
+        - index.html
+    # type:
+    #   enum:
+    #     - directory
