@@ -77,13 +77,24 @@ fails this "{error.validator}" check:
 {schema_string}
     '''
 
-    if type(error.instance) == str:
+    error_type = type(error.instance)
+
+    if error_type == str:
         return f'''This string:
 {indent}{error.instance}{fail_message}
         '''
-    return f'''This directory:
+
+    if error_type == dict:
+        return f'''This item:
+{to_dir_listing([error.instance], indent)}{fail_message}
+        '''
+
+    if error_type == list:
+        return f'''This directory:
 {to_dir_listing(error.instance, indent)}{fail_message}
-    '''
+        '''
+
+    raise Exception(f'Unrecognized type "{error_type}"')
 
 
 class DirectoryValidationErrors(Exception):
