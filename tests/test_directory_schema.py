@@ -11,20 +11,15 @@ def test_directory_schema():
 
 
 def test_dir_to_dict():
-    fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "has-readme")
+    fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "has-readme-and-license")
     assert directory_schema.dir_to_dict(fixture_path) == [
-        {"type": "file", "name": ".dot-files-should-be-listed"},
+        {"type": "file", "name": "LICENSE.md"},
         {"type": "file", "name": "README.md"},
-        {
-            "type": "directory",
-            "name": "src",
-            "contents": [{"type": "file", "name": "fake.py"}],
-        },
     ]
 
 
 def test_validate_dir():
-    fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "has-readme")
+    fixture_path = os.path.join(os.path.dirname(__file__), "fixtures", "has-readme-and-license")
 
     arr_schema = {'type': 'array'}
     directory_schema.validate_dir(fixture_path, arr_schema)

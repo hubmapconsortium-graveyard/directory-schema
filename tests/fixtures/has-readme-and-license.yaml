@@ -1,0 +1,11 @@
+allOf:
+  - contains:
+      properties:
+        name:
+          enum:
+            - README.md
+  - contains:
+      properties:
+        name:
+          enum:
+            - LICENSE.md
