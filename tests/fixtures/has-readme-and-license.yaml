@@ -2,10 +2,8 @@ allOf:
   - contains:
       properties:
         name:
-          enum:
-            - README.md
+          pattern: 'README\..+'
   - contains:
       properties:
         name:
-          enum:
-            - LICENSE.md
+          pattern: 'LICENSE\..+'
