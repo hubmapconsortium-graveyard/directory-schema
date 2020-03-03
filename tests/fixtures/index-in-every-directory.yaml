@@ -1,0 +1,25 @@
+definitions:
+  recursive_array_with_index:
+    contains:
+      properties:
+        name:
+          enum:
+            - index.html
+    items:
+      oneOf:
+        -
+          properties:
+            type:
+              enum:
+                - file
+        -
+          properties:
+            type:
+              enum:
+                - directory
+            contents:
+              '$ref':
+                '#/definitions/recursive_array_with_index'
+
+'$ref':
+  '#/definitions/recursive_array_with_index'

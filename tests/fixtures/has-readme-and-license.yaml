@@ -1,0 +1,9 @@
+allOf:
+  - contains:
+      properties:
+        name:
+          pattern: 'README\..+'
+  - contains:
+      properties:
+        name:
+          pattern: 'LICENSE\..+'
