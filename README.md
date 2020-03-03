@@ -5,6 +5,8 @@ The specified directory is translated into a JSON structure like the output from
 and is validated against a JSON Schema, provided as a dict inside Python,
 or as a JSON or YAML file through the CLI.
 
+Sample schemas and directories are in the [test fixtures](tests/fixtures).
+
 ## CLI
 
 ```
