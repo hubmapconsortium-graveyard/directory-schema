@@ -1,5 +1,7 @@
 # directory_schema
 
+[![PyPI](https://img.shields.io/pypi/v/directory_schema.svg)](https://pypi.org/project/directory-schema/)
+
 Use JSON Schema to validate directory structures:
 The specified directory is translated into a JSON structure like the output from `tree -J`,
 and is validated against a JSON Schema, provided as a dict inside Python,
