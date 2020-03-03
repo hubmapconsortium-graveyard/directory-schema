@@ -10,9 +10,9 @@ def test_directory_schema():
     assert directory_schema is not None
 
 
-def test_dir_to_dict():
+def test_dir_to_list():
     fixture_path = os.path.join(os.path.dirname(__file__), 'fixtures', 'index-in-every-directory')
-    assert directory_schema.dir_to_dict(fixture_path) == [
+    assert directory_schema._dir_to_list(fixture_path) == [
         {'type': 'file', 'name': 'index.html'},
         {'type': 'directory', 'name': 'sub', 'contents': [
             {'type': 'file', 'name': 'index.html'}

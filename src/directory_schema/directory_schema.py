@@ -16,7 +16,7 @@ def to_dir_listing(dir_as_list, indent=''):
     ])
 
 
-def dir_to_dict(path):
+def _dir_to_list(path):
     '''
     Walk the directory at `path`, and return a dict like that from `tree -J`:
 
@@ -40,7 +40,7 @@ def dir_to_dict(path):
                 'name': entry.name
             }
             if is_dir:
-                item['contents'] = dir_to_dict(os.path.join(path, entry.name))
+                item['contents'] = _dir_to_list(os.path.join(path, entry.name))
             items_to_return.append(item)
     return items_to_return
 
@@ -50,7 +50,7 @@ def validate_dir(path, schema_dict):
     Given a directory path, and a JSON schema as a dict,
     validate the directory structure against the schema.
     '''
-    as_dict = dir_to_dict(path)
+    as_dict = _dir_to_list(path)
     try:
         validate(as_dict, schema_dict, cls=Draft7Validator)
     except ValidationError:
