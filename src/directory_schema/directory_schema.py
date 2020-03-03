@@ -4,11 +4,11 @@ from jsonschema import Draft7Validator
 from yaml import dump as dump_yaml
 
 
-def to_dir_listing(dir_as_list, indent=''):
+def _to_dir_listing(dir_as_list, indent=''):
     next_indent = indent + '    '
     return ''.join([
         '\n' + indent + item['name']
-        + to_dir_listing(
+        + _to_dir_listing(
             item['contents'] if 'contents' in item else [],
             next_indent
         )
@@ -60,7 +60,7 @@ def validate_dir(path, schema_dict):
         raise DirectoryValidationErrors(errors)
 
 
-def validation_error_to_string(error, indent):
+def _validation_error_to_string(error, indent):
     schema_string = ''.join([
         f'\n{indent}{line}' for line in
         dump_yaml(error.schema[error.validator]).split('\n')
@@ -81,12 +81,12 @@ fails this "{error.validator}" check:
 
     if error_type == dict:
         return f'''This item:
-{to_dir_listing([error.instance], indent)}{fail_message}
+{_to_dir_listing([error.instance], indent)}{fail_message}
         '''
 
     if error_type == list:
         return f'''This directory:
-{to_dir_listing(error.instance, indent)}{fail_message}
+{_to_dir_listing(error.instance, indent)}{fail_message}
         '''
 
     raise Exception(f'Unrecognized type "{error_type}"')
@@ -98,7 +98,7 @@ class DirectoryValidationErrors(Exception):
 
     def __str__(self):
         return '\n'.join([
-            validation_error_to_string(e, '    ')
+            _validation_error_to_string(e, '    ')
             for e in self.json_validation_errors
         ])
 
