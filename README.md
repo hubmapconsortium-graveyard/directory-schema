@@ -7,6 +7,8 @@ or as a JSON or YAML file through the CLI.
 
 Sample schemas and directories are in the [test fixtures](tests/fixtures).
 
+Instructions for contributors are [here](CONTRIBUTING.md).
+
 ## CLI
 
 ```
