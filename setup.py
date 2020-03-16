@@ -26,9 +26,9 @@ setup(
     keywords="directory_schema",
     name="directory_schema",
     package_dir={"": "src"},
-    packages=find_packages(include=["src/directory_schema", "src/directory_schema.*"]),
+    packages=find_packages("src"),
     setup_requires=[],
     url="https://github.com/hubmapconsortium/directory-schema",
-    version="0.0.1",
+    version="0.0.2",
     zip_safe=False,
 )
