@@ -1,3 +1,5 @@
+## 💥 *Deprecated and archived* 💥
+
 # directory_schema
 
 [![PyPI](https://img.shields.io/pypi/v/directory_schema.svg)](https://pypi.org/project/directory-schema/)
